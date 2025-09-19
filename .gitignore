@@ -1,0 +1,22 @@
+# Development files
+.vscode/settings.json
+
+# Upload directories
+uploads/profiles/*
+!uploads/profiles/.gitkeep
+uploads/posts/*
+!uploads/posts/.gitkeep
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database dumps
+*.sql.backup
+
+# Environment files
+.env
+config/local.php

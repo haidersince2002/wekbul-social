@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: webkul-project
+    env: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    dockerCommand: >-
+      bash -lc 'sed -i "s/Listen 80/Listen ${PORT:-10000}/" /etc/apache2/ports.conf &&
+      mkdir -p /var/www/html/uploads/posts /var/www/html/uploads/profiles &&
+      chown -R www-data:www-data /var/www/html/uploads &&
+      apache2-foreground'
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: APP_ENV
+        value: production
+    disk:
+      name: uploads
+      mountPath: /var/www/html/uploads
+      sizeGB: 5
