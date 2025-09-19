@@ -15,10 +15,17 @@ class Database
 
     public function __construct()
     {
+        // Optional local override file (git-ignored) to avoid hardcoding secrets
+        $local = __DIR__ . '/local.php';
+        if (file_exists($local)) {
+            // local.php should set DB_HOST, DB_NAME, DB_USER, DB_PASS via putenv() or $_ENV
+            include $local;
+        }
+
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->dbname = getenv('DB_NAME') ?: 'social_network';
         $this->username = getenv('DB_USER') ?: 'root';
-        $this->password = getenv('DB_PASS') ?: 'H@iderAli8952';
+        $this->password = getenv('DB_PASS') ?: '';
         $this->connect();
     }
 
