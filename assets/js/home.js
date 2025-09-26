@@ -37,7 +37,9 @@ $(function () {
     e.preventDefault();
     const formData = new FormData(this);
     const $submitBtn = $(this).find('button[type="submit"]');
-    $submitBtn.prop("disabled", true).html("🔄 Sharing...");
+    $submitBtn
+      .prop("disabled", true)
+      .html('<span class="spinner"></span> Sharing...');
 
     $.ajax({
       url: "api/posts.php",
@@ -63,7 +65,11 @@ $(function () {
         showToast("An error occurred while sharing your post", "error");
       },
       complete: function () {
-        $submitBtn.prop("disabled", false).html("🚀 Share Post");
+        $submitBtn
+          .prop("disabled", false)
+          .html(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Share Post'
+          );
       },
     });
   });
@@ -147,4 +153,16 @@ $(function () {
       $("#postImage").trigger("change");
     }
   });
+
+  // Toast message function
+  function showToast(message, type) {
+    const toast = $("<div>").addClass("message").addClass(type).text(message);
+
+    $("#messageContainer").append(toast);
+
+    // Auto-remove after 5 seconds
+    setTimeout(function () {
+      toast.remove();
+    }, 5000);
+  }
 });

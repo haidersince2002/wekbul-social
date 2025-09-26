@@ -50,7 +50,16 @@ class Post
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $posts = $stmt->fetchAll();
+
+        // Set default profile picture for posts where the user has none
+        foreach ($posts as $key => $post) {
+            if (empty($post['user_profile_picture'])) {
+                $posts[$key]['user_profile_picture'] = '';
+            }
+        }
+
+        return $posts;
     }
 
     public function delete($postId, $userId)

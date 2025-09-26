@@ -52,7 +52,14 @@ VALUES (:full_name, :email, :password, :age, :profile_picture, NOW())";
         $sql = "SELECT * FROM {$this->table} WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id' => $id]);
-        return $stmt->fetch();
+        $user = $stmt->fetch();
+
+        // Set default profile picture if none exists
+        if (empty($user['profile_picture'])) {
+            $user['profile_picture'] = '';
+        }
+
+        return $user;
     }
 
     public function updateProfile($id, $data)

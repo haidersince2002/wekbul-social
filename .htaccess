@@ -1,16 +1,74 @@
 Options -Indexes
 
-# Deny web access to config and class PHP files
-<FilesMatch "^(config|classes)/.*\.php$">
+# Enable rewrite engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect to HTTPS if not already using it (for production)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Handle PHP files without extension
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+# Deny web access to sensitive files
+<FilesMatch "^(config|classes)/.*\.php$|^\.htaccess$|^\.git|^\.env$|^config/local\.php$">
     Require all denied
 </FilesMatch>
 
 # Security headers
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
-    Header always set X-Frame-Options "DENY"
-    Header always set X-XSS-Protection "0"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "no-referrer-when-downgrade"
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
     Header always set Cross-Origin-Resource-Policy "same-origin"
+</IfModule>
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Control cache headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Compress text files
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# PHP settings for production
+<IfModule mod_php7.c>
+    # Maximum upload file size
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    # Security settings
+    php_flag display_errors off
+    php_flag log_errors on
+    # Session security
+    php_flag session.cookie_httponly on
+    php_flag session.use_only_cookies on
 </IfModule>

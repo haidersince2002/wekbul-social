@@ -5,7 +5,7 @@ $(document).ready(function () {
     e.preventDefault();
 
     // Clear previous messages
-    $(".message").remove();
+    $(".form-message").remove();
     $(".error-message").text("");
 
     const formData = $(this).serialize();
@@ -23,7 +23,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.success) {
-          $('<div class="message success"></div>')
+          $('<div class="form-message success"></div>')
             .text(response.message)
             .insertBefore("#loginForm");
 
@@ -31,13 +31,13 @@ $(document).ready(function () {
             window.location.href = response.redirect;
           }, 1500);
         } else {
-          $('<div class="message error"></div>')
+          $('<div class="form-message error"></div>')
             .text(response.message)
             .insertBefore("#loginForm");
         }
       },
       error: function () {
-        $('<div class="message error"></div>')
+        $('<div class="form-message error"></div>')
           .text("An error occurred. Please try again.")
           .insertBefore("#loginForm");
       },

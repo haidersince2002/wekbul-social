@@ -96,6 +96,7 @@ $(document).ready(function () {
     // Clear previous messages
     $(".error-message").text("");
     $(".form-group input").removeClass("error");
+    $(".form-message").remove();
 
     const formData = new FormData(this);
     const submitBtn = $(this).find('button[type="submit"]');
@@ -114,7 +115,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.success) {
-          $('<div class="message success"></div>')
+          $('<div class="form-message success"></div>')
             .text(response.message)
             .insertBefore("#signupForm");
 
@@ -122,13 +123,13 @@ $(document).ready(function () {
             window.location.href = "login.php";
           }, 2000);
         } else {
-          $('<div class="message error"></div>')
+          $('<div class="form-message error"></div>')
             .text(response.message)
             .insertBefore("#signupForm");
         }
       },
       error: function () {
-        $('<div class="message error"></div>')
+        $('<div class="form-message error"></div>')
           .text("An error occurred. Please try again.")
           .insertBefore("#signupForm");
       },

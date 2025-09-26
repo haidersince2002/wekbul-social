@@ -31,42 +31,4 @@
       }, 300);
     }, 4000);
   };
-
-  // Theme toggle with persistence
-  try {
-    var savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      document.body.classList.add("theme-light");
-    }
-  } catch (e) {
-    // ignore storage errors
-  }
-
-  function applyTheme(isLight) {
-    if (isLight) {
-      document.body.classList.add("theme-light");
-      try {
-        localStorage.setItem("theme", "light");
-      } catch (e) {}
-    } else {
-      document.body.classList.remove("theme-light");
-      try {
-        localStorage.setItem("theme", "dark");
-      } catch (e) {}
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    var btn = document.getElementById("themeToggle");
-    if (btn) {
-      btn.addEventListener("click", function () {
-        var isLight = !document.body.classList.contains("theme-light");
-        applyTheme(isLight);
-        window.showToast(
-          isLight ? "Light theme enabled" : "Dark theme enabled",
-          "success"
-        );
-      });
-    }
-  });
 })();
