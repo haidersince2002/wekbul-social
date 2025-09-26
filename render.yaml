@@ -2,7 +2,7 @@ services:
   # Web Service for PHP Application
   - type: web
     name: connecthub
-    runtime: php
+    runtime: php-nginx
     buildCommand: |
       # Create required directories with proper permissions
       mkdir -p uploads/profiles uploads/posts
@@ -10,8 +10,8 @@ services:
     startCommand: |
       # Apply database migrations
       php db-init.php
-      # Start PHP server with Apache configuration
-      heroku-php-apache2
+      # Start PHP server with Nginx configuration
+      heroku-php-nginx .
     envVars:
       - key: DB_HOST
         sync: false
