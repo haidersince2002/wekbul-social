@@ -2,7 +2,7 @@ services:
   # Web Service for PHP Application
   - type: web
     name: connecthub
-    env: php
+    runtime: php
     buildCommand: |
       # Create required directories with proper permissions
       mkdir -p uploads/profiles uploads/posts
@@ -22,7 +22,6 @@ services:
       - key: DB_PASS
         sync: false
       - key: BASE_URL
-        sync: false
         value: https://connecthub.onrender.com
       - key: DEBUG
         value: false
@@ -34,8 +33,6 @@ services:
     autoDeploy: true
     domains:
       - connecthub.onrender.com
-    # Handling static assets
-    staticPublishPath: ./
 
 databases:
   # MySQL Database
