@@ -1,4 +1,3 @@
-// File: assets/js/signup.js
 $(document).ready(function () {
   // Client-side validation patterns
   const patterns = {

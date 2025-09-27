@@ -1,7 +1,5 @@
 <?php
 
-// File: classes/FileUpload.php
-
 class FileUpload
 {
     private $uploadDir; // absolute filesystem path to uploads base

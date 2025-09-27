@@ -1,4 +1,3 @@
-// File: assets/js/login.js
 $(document).ready(function () {
   // Form submission
   $("#loginForm").on("submit", function (e) {

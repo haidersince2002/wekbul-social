@@ -1,22 +1,7 @@
 <?php
-// File: config/database.php
-
-// Load configuration
-$localConfigFile = __DIR__ . '/local.php';
-if (file_exists($localConfigFile)) {
-    require_once $localConfigFile;
-}
-
-// Set error reporting based on environment
-if (getenv('DEBUG') === 'true') {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-} else {
-    ini_set('display_errors', 0);
-    ini_set('display_startup_errors', 0);
-    error_reporting(0);
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class Database
 {
@@ -31,7 +16,7 @@ class Database
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->dbname = getenv('DB_NAME') ?: 'social_network';
         $this->username = getenv('DB_USER') ?: 'root';
-        $this->password = getenv('DB_PASS') ?: '';
+        $this->password = getenv('DB_PASS') ?: 'H@iderAli8952';
         $this->connect();
     }
 

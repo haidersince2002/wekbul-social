@@ -1,4 +1,3 @@
-// File: assets/js/profile.js
 $(document).ready(function () {
   // Edit profile functionality
   $(".editable").on("click", function () {

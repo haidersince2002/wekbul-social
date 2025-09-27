@@ -1,5 +1,3 @@
--- File: database.sql
-
 CREATE DATABASE IF NOT EXISTS social_network;
 USE social_network;
 
@@ -38,7 +36,6 @@ CREATE TABLE post_reactions (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Indexes for better performance
 CREATE INDEX idx_posts_user_id ON posts(user_id);
 CREATE INDEX idx_posts_created_at ON posts(created_at);
 CREATE INDEX idx_reactions_post_id ON post_reactions(post_id);

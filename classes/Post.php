@@ -1,5 +1,4 @@
 <?php
-// File: classes/Post.php (Enhanced with new method)
 class Post
 {
     private $db;

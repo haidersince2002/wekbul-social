@@ -1,11 +1,9 @@
 <?php
-// File: home.php (Main Feed Page - Shows All Posts)
 session_start();
 require_once 'config/database.php';
 require_once 'classes/User.php';
 require_once 'classes/Post.php';
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: auth/login.php');
     exit;
@@ -22,7 +20,6 @@ $pageTitle = 'Home - ConnectHub';
 <?php include __DIR__ . '/includes/header.php'; ?>
 <div class="home-container">
     <div class="home-layout">
-        <!-- Left Sidebar -->
         <div class="home-sidebar">
             <div class="sidebar-profile">
                 <?php
@@ -55,9 +52,7 @@ $pageTitle = 'Home - ConnectHub';
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="home-content">
-            <!-- Create Post Section -->
             <div class="create-post-section">
                 <h3>Create Post</h3>
                 <form id="createPostForm" enctype="multipart/form-data">
@@ -69,7 +64,6 @@ $pageTitle = 'Home - ConnectHub';
                             placeholder="What's on your mind, <?php echo htmlspecialchars($currentUser['full_name']); ?>?" required></textarea>
                     </div>
 
-                    <!-- File Upload Area -->
                     <div class="file-upload-area" onclick="document.getElementById('postImage').click()">
                         <input type="file" id="postImage" name="post_image" accept="image/jpeg,image/jpg,image/png" style="display: none;">
                         <div id="uploadText">
@@ -96,7 +90,6 @@ $pageTitle = 'Home - ConnectHub';
                 </form>
             </div>
 
-            <!-- Posts Feed -->
             <div class="feed-section">
                 <h2>Recent Posts</h2>
                 <div id="postsContainer">
@@ -117,7 +110,6 @@ $pageTitle = 'Home - ConnectHub';
                     <?php else: ?>
                         <?php foreach ($allPosts as $post): ?>
                             <div class="post-card" data-post-id="<?php echo $post['id']; ?>">
-                                <!-- Post Header -->
                                 <div class="post-header">
                                     <?php
                                     $postUserProfilePic = isset($post['user_profile_picture']) && $post['user_profile_picture'] !== ''
@@ -132,7 +124,6 @@ $pageTitle = 'Home - ConnectHub';
                                     </div>
                                 </div>
 
-                                <!-- Post Content -->
                                 <div class="post-content">
                                     <div class="post-description">
                                         <?php echo nl2br(htmlspecialchars($post['description'])); ?>
@@ -143,7 +134,6 @@ $pageTitle = 'Home - ConnectHub';
                                     <?php endif; ?>
                                 </div>
 
-                                <!-- Post Actions -->
                                 <div class="post-actions">
                                     <button class="action-btn btn-like" data-post-id="<?php echo $post['id']; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

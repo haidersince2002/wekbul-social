@@ -22,7 +22,6 @@ $pageTitle = 'Profile - ConnectHub';
 
 <?php include __DIR__ . '/includes/header.php'; ?>
 <div class="profile-container">
-    <!-- Profile Header Section -->
     <div class="profile-header-section">
         <div class="profile-cover"></div>
         <div class="profile-header-content">
@@ -60,7 +59,6 @@ $pageTitle = 'Profile - ConnectHub';
     </div>
 
     <div class="profile-content">
-        <!-- Profile Information Tab -->
         <div class="profile-tab-content active" id="info-tab">
             <div class="profile-card">
                 <h3>
@@ -106,7 +104,6 @@ $pageTitle = 'Profile - ConnectHub';
                 </div>
             </div>
 
-            <!-- Create New Post Card -->
             <div class="profile-card">
                 <h3>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -138,7 +135,6 @@ $pageTitle = 'Profile - ConnectHub';
             </div>
         </div>
 
-        <!-- Posts Tab -->
         <div class="profile-tab-content" id="posts-tab">
             <div class="profile-posts">
                 <?php if (empty($userPosts)): ?>
@@ -156,7 +152,6 @@ $pageTitle = 'Profile - ConnectHub';
                     <div id="postsWrapper">
                         <?php foreach ($userPosts as $userPost): ?>
                             <div class="post-card" data-post-id="<?php echo $userPost['id']; ?>">
-                                <!-- Post Header -->
                                 <div class="post-header">
                                     <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile Picture" class="post-author-avatar">
                                     <div class="post-author-info">
@@ -165,7 +160,6 @@ $pageTitle = 'Profile - ConnectHub';
                                     </div>
                                 </div>
 
-                                <!-- Post Content -->
                                 <div class="post-content">
                                     <div class="post-description">
                                         <?php echo nl2br(htmlspecialchars($userPost['description'])); ?>
@@ -175,7 +169,6 @@ $pageTitle = 'Profile - ConnectHub';
                                     <?php endif; ?>
                                 </div>
 
-                                <!-- Post Actions -->
                                 <div class="post-actions">
                                     <button class="action-btn btn-like" data-post-id="<?php echo $userPost['id']; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -208,7 +201,6 @@ $pageTitle = 'Profile - ConnectHub';
     </div>
 </div>
 
-<!-- Edit Modal -->
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
